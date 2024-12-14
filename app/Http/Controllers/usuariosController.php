@@ -83,8 +83,8 @@ class usuariosController extends Controller
         'apellidoP' => 'nullable|string|max:255',
         'apellidoM' => 'nullable|string|max:255',
         'correo' => 'nullable|email', // No es único.
-        'password' => 'nullable|min:8',
-        'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'password' => 'nullable|string|max:255',
+        'foto' => 'nullable',
     ]);
 
     if ($validar->fails()) {
@@ -97,14 +97,14 @@ class usuariosController extends Controller
 
     // Filtrar los campos nulos
     $data = array_filter($requerimiento->all(), fn($value) => $value !== null);
-
+    /*
     if (isset($data['password'])) {
         $data['password'] = bcrypt($data['password']);
     }
 
     if ($requerimiento->hasFile('foto')) {
         $data['foto'] = $requerimiento->file('foto')->store('fotos', 'public');
-    }
+    }*/
 
     $usuario->update($data);
 
